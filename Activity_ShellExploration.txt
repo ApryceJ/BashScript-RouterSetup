@@ -1,11 +1,21 @@
 Describe the following commands:
 
+all are builtin's
+compgen -b
+
 env - the envirnoment your script is running in, it is comprised of /etc/profile, /etc/profile.d, /etc/bashrc and any other custom changes. this is also a cmd that can be run to find out status of the environment.
-set - allows you to change the value of shell options and shell variables, and shows status of environment as well
-unset - allows to specifically remove the value of the respective environment variable
-export - exports a variable to be used in a child bash session
+
+set - allows you to change the value of shell options will change the behaviour of the shell, and shows status of environment as well
+
+shopt - configures internal bash options, for backwards compatibility
+
+unset - allows to specifically remove the value of the respective environment variable and removes the variable from the environment. applies to variables, functions and alias 
+
+export - exports a variable to be used in a child bash session, the child bash will inherit
+
 declare - to declare variables to be used in current environment
-alias - to link or reference another function or cmd. To speed up typing or to avoid typing with shortcuts
+
+alias - to link or reference another function or cmd. Shortcut to long cmd and allows to type with shortcuts. 
 
 Define the purpose and contents of the the following files
 
