@@ -1,0 +1,16 @@
+Describe the following commands:
+
+env - the envirnoment your script is running in
+set - allows you to change the value of shell options and shell varabiles
+unset - allows to specifically remove the value of the respective variable
+export - to export all values of all variables or the ones specified
+declare - to declare variables
+alias - to link or reference another function or method
+
+Define the purpose and contents of the the following files
+
+/etc/profile - used to set environment variables and it is called by the login process
+~/.bash_profile - user specific script, sets variables, and running cmds
+/etc/bashrc - global startup script, all scripts in the dir are called and run by ~/.bashrc
+~/.bashrc - read and executed by bash for subshells
+~/.bash_history - cmd history
