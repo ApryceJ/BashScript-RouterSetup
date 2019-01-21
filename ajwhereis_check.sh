@@ -1,9 +1,9 @@
 #!/bin/bash
 #===============================================================================
 #
-#          FILE: whereis_check.sh
+#          FILE:ajwhere_check.sh 
 #
-#         USAGE: ./whereis_check.sh
+#         USAGE:
 #
 #   DESCRIPTION: Outputs the location of a command binary and returns an exit code
 #                of zero if it is avaible or 127 if it can't be found
@@ -12,12 +12,11 @@
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Thomas Lane (tl), tlane@bcit.ca
-#  ORGANIZATION: BCIT
-#       CREATED: 04/23/2015 12:26
+#        AUTHOR: Aaron Jones, aj : ajones125@my.bcit.ca or aaronp.jones7@gmail.com 
+#  ORGANIZATION: BCIT - NASP STUDENT
+#       CREATED: 
 #      REVISION:  ---
 #===============================================================================
-
 set -o nounset                              # Treat unset variables as an error
 
 #Variable declarations

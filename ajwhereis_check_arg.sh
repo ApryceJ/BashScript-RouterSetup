@@ -1,34 +1,32 @@
 #!/bin/bash
 #===============================================================================
 #
-#          FILE: whereis_check.sh
+#          FILE:ajwhere_check_arg.sh 
 #
-#         USAGE: ./whereis_check.sh
+#         USAGE:
 #
 #   DESCRIPTION: Outputs the location of a command binary and returns an exit code
-#                of zero if it is avaible or 127 if it can't be found
+#                of zero if it is avaible or 127 if it can't be found, this takes an aurgument.
 #
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Thomas Lane (tl), tlane@bcit.ca
-#  ORGANIZATION: BCIT
-#       CREATED: 04/23/2015 12:26
+#        AUTHOR: Aaron Jones, aj : ajones125@my.bcit.ca or aaronp.jones7@gmail.com 
+#  ORGANIZATION: BCIT - NASP STUDENT
+#       CREATED: 
 #      REVISION:  ---
 #===============================================================================
-
 set -o nounset                              # Treat unset variables as an error
 
 #Variable declarations
 #todo place variable declarations here
-declare file
+declare file 
 declare whereis_output
 declare locations
 declare -i state_code=0
 #Solicit command that should be searched and store it in the varialbe command
 #todo: use read -p statement to get input from user and store it in the variable: cmd
-#read -p "Please enter the file you would like to check where the file: " \
  file=$1
 
 #Store the output of the whereis invocation that searches for the users inputed
