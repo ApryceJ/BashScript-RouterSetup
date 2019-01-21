@@ -17,5 +17,6 @@
 #      REVISION:  ---
 #===============================================================================
 set -o nounset                              # Treat unset variables as an error
-
-echo 
+#echo -e "\n\tBeginning echo_arugments.sh"
+echo $1
+#echo -e "\tEnding echo_arugments.sh"

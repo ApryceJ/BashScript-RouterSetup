@@ -21,7 +21,7 @@ set -o nounset                              # Treat unset variables as an error
 
 #Variable declarations
 #todo place variable declarations here
-declare file
+declare cmd
 declare whereis_output
 declare locations
 declare -i state_code=0
@@ -37,8 +37,8 @@ elif [ $# -gt 1 ]; then
 # command in the variable "whereis_output"
 #todo variable assigment to output of command - follows form variable=$( command )
 else
-  file=$1
-  whereis_output=$(whereis $file)
+  cmd=$1
+  whereis_output=$(whereis $cmd)
 
 #Using the variable whereis_output process the output to drop the command name
 #store the output in locations
