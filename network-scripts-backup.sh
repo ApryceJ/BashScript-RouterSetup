@@ -49,3 +49,23 @@ for file in $files ;do
   cp "$1$file" "$backupdir/$file.bak"
 done
 echo done
+
+### Why does the code fail?
+#~~~bash #!/bin/bash $ARG1=$1
+
+#if [ $1 == "" ]; then echo "no variable supplied" fi ~~~
+#should look like this:
+
+#bash #!/bin/bash
+#ARG1=$1 - should be here
+
+#if [ $1 == "" ]; then
+#  echo "no variable supplied"
+#fi needs to be here on another line
+
+## Find 2 other ways to test for an empty variables
+# if [$# == 0]; is another way that i have used in my scripts
+# if [ -z "$VAR" ]; is another way this returns true if the variables are empty
+#
+#
+#
