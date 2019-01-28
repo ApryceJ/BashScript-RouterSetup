@@ -40,24 +40,23 @@ printf "Use the following to change the process:\n1 - SIGHUP \n2 - SIGINT\n15 - 
 
 case $signaltosend in
   1)
-     signal="SIGHUP"
+     signal=SIGHUP
   ;;
   2)
-     signal="SIGINT"
+     signal=SIGINT
   ;;
   15)
-    signal="SIGTERM"
+    signal=SIGTERM
   ;;
   30)
-    signal="SIGUSR1"
+    signal=SIGUSR1
   ;;
   *)
   echo "Sorry this script only signals 1-hangup,2-interupt,15-terminate,30-user"
   exit 1
   ;;
 esac
-
-kill -$signal $pidtoaffect
+/bin/kill -s $signal $pidtoaffect
 
 }
 
