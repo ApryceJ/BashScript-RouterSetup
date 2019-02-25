@@ -47,5 +47,5 @@ iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
 #saves rules to make persistant
 iptables-save > /etc/sysconfig/iptables
-#show them rules baby
+
 iptables -nvL
