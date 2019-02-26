@@ -17,17 +17,25 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#getting alist of network devices
-netdev[]=ls /sys/class/netc | grep e
+#https://fedoraproject.org/wiki/Networking/CLI
+#nmcli con mod $dev ipv4.dns “8.8.8.8 8.8.4.4”
+function concreate {
+ source ./network.conf
+  netdev=$(ls /sys/class/net | grep e)
+#load the address variables
+    $ip=${INTF[netdev[0],0]}
+    $pFIX=${INTF[netdev[0],1]}
+    $GW=${INTF[netdev[0],2]}
+    #$DNS
 
-#Variable delcare and load - but how to load the array??? and will it be an array of arrays???
-ifcfgbunch=[]
-#create a function and use network manager to create the ifcfg files from the list
-
-define function ifcfgcreate(dev,name,ip,mask,gateway){
-  #loop
-  for ifcfg in ifcfgbunch
+#connection creation
+  for dev in $(netdev)
   do
-  nmcli con add type ethernet con-name ifcfg.name ifname ifcfg.device ip4 ifcfg.ip/ifcfg.mask gw4 ifcfg.gateway
+    #delete existing connections
+    nmcli con delete id $dev
+    #create connections
+    nmcli con add type ethernet con-name $dev ifname $dev ip4 $ip/$pFIX gw4 $GW
   done
 }
+
+concreate

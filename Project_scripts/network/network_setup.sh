@@ -17,14 +17,14 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#turn on packet forwarding
-sysctl net.ipv4.ip_forward = 1
+source ./net_if_setup.sh
 
-#turn off networkmanager and firewalld as iptables will be used.
-#echo "+++++++ Turning off networkmanager +++++++"
-#systemctl disable NetworkManager.service
-#systemctl stop NetworkManager.service
-#sleep 3
+#turn on packet forwarding
+sysctl net.ipv4.ip_forward=1
+#turn off firewalld as iptables will be used.
 echo "+++++++ Turning off firewalld +++++++"
-systemtctl disable firewalld
-systemtctl stop firewalld
+systemctl disable firewalld
+systemctl stop firewalld
+echo "done"
+
+concreate
