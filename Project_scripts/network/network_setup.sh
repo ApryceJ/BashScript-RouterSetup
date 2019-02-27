@@ -17,6 +17,7 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
+#sourcing the concreate function
 source ./net_if_setup.sh
 
 #turn on packet forwarding
@@ -26,5 +27,7 @@ echo "+++++++ Turning off firewalld +++++++"
 systemctl disable firewalld
 systemctl stop firewalld
 echo "done"
-
+sleep=2
+echo "++++++++ Turning On the Network Taps ++++++++"
 concreate
+echo "++++ Done with the network! +++++"

@@ -21,21 +21,21 @@ set -o nounset                              # Treat unset variables as an erro
 #nmcli con mod $dev ipv4.dns “8.8.8.8 8.8.4.4”
 function concreate {
  source ./network.conf
-  netdev=$(ls /sys/class/net | grep e)
-#load the address variables
-    $ip=${INTF[netdev[0],0]}
-    $pFIX=${INTF[netdev[0],1]}
-    $GW=${INTF[netdev[0],2]}
-    #$DNS
-
+i=0
 #connection creation
-  for dev in $(netdev)
+  for dev in ${devcname[@]} #loops over every device in /sys/class/net
   do
     #delete existing connections
-    nmcli con delete id $dev
-    #create connections
-    nmcli con add type ethernet con-name $dev ifname $dev ip4 $ip/$pFIX gw4 $GW
+    echo "nmcli con delete id $dev"
+      #might need an if statement to avoid putting more than one gateway
+      if [[ $i < 1 ]]; then
+        #create connections gateway
+      echo "nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]} gw4 ${INTF[$dev,2]}"
+      else
+        echo "nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]}"
+      fi
+        let "i++"
   done
 }
 
-concreate
+#concreate()
