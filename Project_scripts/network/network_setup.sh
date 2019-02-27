@@ -21,13 +21,22 @@ set -o nounset                              # Treat unset variables as an erro
 source ./net_if_setup.sh
 
 #turn on packet forwarding
+echo " "
+echo "+++++ Turning Packet Forwarding On ++++++++ "
 sysctl net.ipv4.ip_forward=1
+echo " "
 #turn off firewalld as iptables will be used.
-echo "+++++++ Turning off firewalld +++++++"
+echo "+++++++ Turning off firewalld ++++++++++"
 systemctl disable firewalld
 systemctl stop firewalld
 echo "done"
+echo " "
 sleep=2
 echo "++++++++ Turning On the Network Taps ++++++++"
 concreate
-echo "++++ Done with the network! +++++"
+echo " "
+systemctl restart network.service
+ip a
+echo " "
+echo "++++ Done with the Network! +++++"
+echo " "

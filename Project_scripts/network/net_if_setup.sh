@@ -26,13 +26,13 @@ i=0
   for dev in ${devcname[@]} #loops over every device in /sys/class/net
   do
     #delete existing connections
-    echo "nmcli con delete id $dev"
+    nmcli con delete id $dev
       #might need an if statement to avoid putting more than one gateway
       if [[ $i < 1 ]]; then
         #create connections gateway
-      echo "nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]} gw4 ${INTF[$dev,2]}"
+       nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]} gw4 ${INTF[$dev,2]}
       else
-        echo "nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]}"
+        nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]}
       fi
         let "i++"
   done
