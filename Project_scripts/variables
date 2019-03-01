@@ -1,7 +1,13 @@
 
+outterdomain=as.learn
+innerdomain=s09.as.learn
+hostname=s09rtr+$outterdomain
+
+
 #Unbound variables
 
 #nsd variables
+
 
 #DHCP variables
 

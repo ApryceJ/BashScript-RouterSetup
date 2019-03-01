@@ -1,7 +1,7 @@
 #!/bin/bash
 #===============================================================================
 #
-#          FILE:main.sh 
+#          FILE:main.sh
 #
 #         USAGE:sh main.sh
 #
@@ -12,27 +12,28 @@
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Aaron Jones, aj : ajones125@my.bcit.ca or aaronp.jones7@gmail.com 
+#        AUTHOR: Aaron Jones, aj : ajones125@my.bcit.ca or aaronp.jones7@gmail.com
 #  ORGANIZATION: BCIT - NASP STUDENT
 #      REVISION:  ---
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
 # Configure Basic setgtings, updates and turning off other services refer to sources script
-	#source basic_configuration.sh, will install all packages.
-	#Handle already installed
+	source ./basic_configuration.sh  #will install all packages.
 
 # Configure Turn Off SELINux
-	#Source Selinux_Setup.sh
+	Source ./Selinux_Setup.sh
 
 #Configure Newtwork
-	#SED edit IfCFG files - pull from variable list??
+  source ./network/network_setup.sh
 
 # configure IPtables
-	# run IPTables Script
+  source ./IPTables Script
 
 #NSD_setup
 	#zonefiles edited with SED?
+  source ./nsd/nsd_setup.sh
+
 #Unbound_setup
 	#Conf files Edited with Sed?
 

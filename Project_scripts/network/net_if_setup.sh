@@ -31,11 +31,15 @@ i=0
       if [[ $i < 1 ]]; then
         #create connections gateway
        nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]} gw4 ${INTF[$dev,2]}
+       nmcli con mod $dev ipv4.dns ${INTF[$dev,3]}
       else
         nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]}
       fi
         let "i++"
+        #to be deleted after testing
+        nmcli con delete id ${devcname[2]}
   done
+
 }
 
 #concreate()
