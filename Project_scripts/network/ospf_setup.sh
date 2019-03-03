@@ -18,46 +18,55 @@
 set -o nounset                              # Treat unset variables as an erro
 
 source ./network.conf
+
 function doospf {
-#clear old files and put newones in
- rm /etc/quagga/ospfd.conf
- touch /etc/quagga/ospfd.conf
- rm /etc/quagga/zebra.conf
- touch /etc/quagga/zebra.conf
+ cp ./ospfd.cnf $confospfd
+ cp ./zebra.cnf $confzebra
 
-#chown -r the quagga mkdir
- chown -R quagga:quagga /etc/quagga/
+ #chown -r the quagga mkdir
+  chown -R quagga:quagga /etc/quagga/
 
-#configure or edit the config files
+#edit logfiles once
+ sed -i -E "s@log [a-z]+@log file $logospf@" $confospfd
+ sed -i -E "s@log [a-z]+@log file $logzebra@" $confzebra
 
-#hostname in zebra file
- echo "hostname $HOSTNAME" > $confzebra
-# logfile location
-  echo -e "log file $logospf\n!" > $confospfd
-  echo -e "log file $logzebra\n!" > $confzebra
+#Put hostname in zebra
+sed -i -E "s/hostname/hostname $HOSTNAME/" $confzebra
+#get line number log to start
+ linenum=$(sed -n '/log/=' $confospfd )
 
-  for dev in ${devcname[@]}; do
-  #zebra
-     echo "interface $dev" >> $confzebra
-   #int description
-    echo -e " description $dev \n!" >> $confzebra
-  #ospf
-    echo "interface $dev" >> $confospfd
-  #int description
-    echo -e " description $dev \n!" >> $confospfd
-  done
 
-  echo "router ospf" >> $confospfd
-  echo "ospf router-id ${INTF[${devcname[0]},0]}" >> $confospfd
-  echo  " network ${INTF[${devcname[0]},4]}/${INTF[${devcname[0]},1]} area 0.0.0.0" >> $confospfd
-  echo  " network ${INTF[${devcname[1]},2]}/${INTF[${devcname[1]},1]} area 0.0.0.0" >> $confospfd
-  echo -e " network ${INTF[${devcname[2]},2]}/${INTF[${devcname[2]},1]} area 0.0.0.0\n!" >> $confospfd
+for dev in ${devcname[@]}; do
+ let "linenum++"
+#zebra
+   sed -i -E "${linenum} i\interface $dev" $confzebra
+ #int description
+  let "linenum++"
+   sed -i -E "${linenum} i\ description $dev \n!" $confzebra
+#ospf
+   sed -i -E "${linenum} i\interface $dev" $confospfd
+#int description
+  let "linenum++"
+   sed -i "${linenum} i\ description $dev \n!" $confospfd
+done
 
-    echo -e "line vty\n!" >> $confospfd
-    echo -e "line vty\n!" >> $confzebra
+  #enteres router info
+ let "linenum++"
+ sed -i "${linenum} i\router ospf" $confospfd
+ let "linenum++"
+ sed -i -E "${linenum} i\ router-id ${INTF[$dev,0]}" $confospfd
 
-#start the zebra and OSPF services
-systemctl enable --now zebra
-systemctl enable --now ospfd
 
+ declare lenofospfval=${#ospfval[@]}
+ for ((i=0; i<$lenofospfval; i++));
+ do
+   let "linenum++"
+   sed -i -E "${linenum} i\ network ${ospfval[$i]}\/${INTF[${devcname[$i]},1]} area 0.0.0.0" $confospfd
+ done
+
+ #start the zebra and OSPF services
+ systemctl enable --now zebra
+ systemctl restart zebra.service
+ systemctl enable --now ospfd
+ systemctl restart ospfd.service
 }

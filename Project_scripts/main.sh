@@ -34,14 +34,14 @@ set -o nounset                              # Treat unset variables as an erro
 	#zonefiles edited with SED?
   source ./nsd/nsd_setup.sh
 
+#DHCP_setup
+		#config files edited with SED?
+
 #Unbound_setup
 	#Conf files Edited with Sed?
 
-#DHCP_setup
-	#config files edited with SED?
 #hostapd
 	#configuration and adapter ifcfg files edited with sed?
 #postfix
-	#??
+
 #dovecot
-	#??

@@ -1,0 +1,15 @@
+!
+! Zebra configuration saved from vty
+!   2019/01/08 20:38:11
+!
+hostname
+log file
+!
+!
+interface lo
+!
+ip forwarding
+!
+!
+line vty
+!
