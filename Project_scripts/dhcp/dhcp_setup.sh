@@ -18,30 +18,46 @@
 set -o nounset                              # Treat unset variables as an erro
 
 source ./dhcp.conf
-
+#source ../network/network.conf
 #delete config file
-function dodhcp{
+function dodhcp {
 #generate new one
-  rm /etc/dhcpd.conf
-  touch /etc/dhcpd.conf
-  
+  cp ./dhcp.cnf $dhcpcf
+
 #global options
-  echo option domain-name $dname;
+  sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+ \"[a-zA-Z].+)/option domain-name \"$dname\";/" $dhcpcf
+  sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+-[a-z].+)/option domain-name-servers 10.16.9.126;/" $dhcpcf
 
-#eth1 or student lan subnet
-	echo subnet 10.5.5.0 netmask ${dhcpset[${dhcpname[1]},2]} {
-  	 echo range ${dhcpset[${dhcpname[1]},0]} ${dhcpset[${dhcpname[1]},1]};
-	   echo option routers ${dhcpset[${dhcpname[1]},4]};
-	   echo option broadcast-address ${dhcpset[${dhcpname[1]},3]};
-     echo option domain-name-servers ${dhcpset[${dhcpname[1]},4]};
-	   echo default-lease-time 600;
-	   echo -e "max-lease-time 7200;\n }"
-#wireless subnet
-    echo subnet 10.254.239.0 netmask 255.255.255.224 {
-    echo range 10.254.239.10 10.254.239.20;
-    echo option routers rtr-239-0-1.example.org, rtr-239-0-2.example.org;
-    echo -e "option domain-name-servers ; \n}"
+#get length of array and divide by 2 - this is poor
+lendhcp=$((${#dhcpset[@]} / 2))
+net=0
+#eth1 or student lan subnet loop for each interface
+for dhc in ${dhcpname[@]}
+do
+	 printf "\n subnet ${netval[$net]} netmask ${dhcpset[$dhc,0]} { \n" >> $dhcpcf
+    for ((i=0; i<$lendhcp; i++))
+    do
+       if [ "$i" -eq 1 ]; then
+         rangestart=$i
+      elif [ "$i" -eq 2 ]; then
+      printf "%s  range ${dhcpset[$dhc,$rangestart]} ${dhcpset[$dhc,$i]}; \n" >> $dhcpcf
+    elif [ "$i" -eq 3 ]; then
+	    printf "%s  option routers ${dhcpset[$dhc,$i]}; \n" >> $dhcpcf
+    elif [ "$i" -eq 4 ]; then
+	    printf "%s  option broadcast-address ${dhcpset[$dhc,$i]};  \n } \n " >> $dhcpcf
+    fi
+  done
+  let "net++"
+done
 
+#static assignmennt loop
+for each in ${!static[@]}; do
+  mac=$(echo ${static[$each]} | cut -d',' -f1)
+  ip=$(echo ${static[$each]} | cut -d',' -f2)
+  printf "\n host $each \n   hardware ethernet $mac; \n   fixed-address $ip; \n } \n " >> $dhcpcf
+done
 #start services
    systemctl enable --now dhcpd
-}
+ }
+
+#dodhcp

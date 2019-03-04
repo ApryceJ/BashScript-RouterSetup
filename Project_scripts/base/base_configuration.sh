@@ -44,7 +44,7 @@ echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
 		yum -y install epel-release
 echo " "
 		echo "++++++++ Installing DHPCD,nsd,Unbound,quagga,hostapd++++++++++++++"
-		yum -y install nsd unbound dhcpd quagga hostapd
+		yum -y install nsd unbound dhcp quagga hostapd
 		sleep=2
 echo " "
 	echo "+++++++++ and Updating Entire System +++++++++++++++"
