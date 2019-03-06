@@ -33,13 +33,13 @@ set -o nounset                              # Treat unset variables as an erro
 #NSD_setup
 	#zonefiles edited with SED?
   source ./nsd/nsd_setup.sh
-
+	donsd
 #DHCP_setup
-		#config files edited with SED?
-
+		source ./dhcp/dhcp_setup.sh
+	dodhcp
 #Unbound_setup
 	#Conf files Edited with Sed?
-
+	source./unbound/Unbound_setup.sh
 #hostapd
 	#configuration and adapter ifcfg files edited with sed?
 #postfix

@@ -1,0 +1,23 @@
+
+
+#conf file dir
+nsdconf=/etc/nsd/nsd.conf
+nsdfrwzone=/etc/nsd/s09.as.learn.zone
+nsdrvzone=/etc/nsd/9.16.10.in-addr.arpa.zone
+
+declare -A frwzone
+frwzone[s09.as.learn.]=s09rtr.as.learn.
+frwzone[rtr.s09.as.learn.]=10.16.9.126
+frwzone[mail.s09.as.learn.]=10.16.9.1
+frwzone[w10.s09.as.learn.]=10.16.9.100
+
+declare -A rvzone
+rvzone[9.16.10.in-addr.arpa.]=s09rtr.as.learn.
+rvzone[126.9.16.10.in-addr.arpa.]=rtr.s09.as.learn.
+rvzone[1.9.16.10.in-addr.arpa.]=mail.s09.as.learn.
+rvzone[001.9.16.10.in-addr.arpa.]=w10.s09.as.learn.
+
+#array to loop over zone names
+declare -A zonefile
+zonefile[s09.as.learn.zone]=s09.as.learn
+zonefile[9.16.10.in-addr.arpa.zone]=9.16.10.in-addr.arpa

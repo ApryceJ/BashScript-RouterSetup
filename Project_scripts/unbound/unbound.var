@@ -1,0 +1,29 @@
+#variables for Unbound_setup
+
+#config variables
+
+unbndcnf=/etc/unbound/unbound.conf
+
+#Array for interfaces
+declare -A interfaces
+interface[0]=10.16.9.126
+interface[1]=127.0.0.1
+
+#array for accesscontrol
+declare -A access
+access[127.0.0.0]=8
+access[10.16.9.0]=24
+access[10.16.255.0]=24
+
+#array for localzones
+declare -A localzone
+localzone[0]=s09.as.learn.
+localzone[1]9.16.10.in-addr.arpa.
+
+#another array for these
+declare -A stubzone
+stubzone[bcit.ca.]=142.232.221.253
+stubzone[htp]=142.232.221.253
+stubzone[as.learn.]=142.232.221.253
+stubzone[s09.as.learn]=10.16.255.9
+stubzone[9.16.10.in-addr.arpa]=10.16.255.9

@@ -1,0 +1,83 @@
+#
+# nsd.conf -- the NSD(8) configuration file, nsd.conf(5).
+#
+# Copyright (c) 2001-2011, NLnet Labs. All rights reserved.
+#
+# See LICENSE for the license.
+#
+# Simplified version for NASP
+
+# options for the nsd server
+server:
+        # uncomment to specify specific interfaces to bind (default are the
+        # wildcard interfaces 0.0.0.0 and ::0).
+        # For servers with multiple IP addresses, list them one by one,
+        ip-address: 10.0.255.26
+
+
+        # listen on IPv4 connections - yes is the default left commented
+        do-ip4: yes
+
+        # listen on IPv6 connections
+        do-ip6: no
+
+        # port to answer queries on. default is 53 left commented
+        # port: 53
+
+        # After binding socket, drop user privileges.
+        # can be a username, id or id.gid.
+        # when looking for running processes nsd will be running as this user
+        # username: nsd
+
+        # The directory for zonefiles.
+        # Use default, left commented
+        #
+        #zonesdir: "/etc/nsd"
+
+        # Optional local server config
+        include: "/etc/nsd/server.d/*.conf"
+
+        # Include optional local configs.
+        include: "/etc/nsd/conf.d/*.conf"
+
+
+# Remote control config section.
+remote-control:
+        # Enable remote control with nsd-control(8) here.
+        # set up the keys and certificates with nsd-control-setup.
+        control-enable: yes
+
+        # what interfaces are listened to for control, default is on localhost.
+        # use default leave commented
+        #
+        # control-interface: 127.0.0.1
+        # control-interface: ::1
+
+        # port number for remote control operations (uses TLS over TCP).
+        # use default leave commented
+        #
+        # control-port: 8952
+
+        # nsd server key file for remote control.
+        # use default leave commented
+        #
+        # server-key-file: "/etc/nsd/nsd_server.key"
+
+        # nsd server certificate file for remote control.
+        # use default leave commented
+        #
+        # server-cert-file: "/etc/nsd/nsd_server.pem"
+
+        # nsd-control key file.
+        # use default leave commented
+        #
+        # control-key-file: "/etc/nsd/nsd_control.key"
+
+        # nsd-control certificate file.
+        # use default leave commented
+        #
+        # control-cert-file: "/etc/nsd/nsd_control.pem"
+
+
+
+# Fixed zone entries (i.e. not added with nsd-control addzone)

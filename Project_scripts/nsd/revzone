@@ -1,18 +1,11 @@
-;zone file for 10.16.9.0 / s09.as.learn reverse lookup
+;zone file for s09.as.learn
 $TTL 10s; 10 secs default TTL for zone
 9.16.10.in-addr.arpa.         IN      SOA     s09rtr.as.learn. htp.bcit.ca. (
                         2016030101    ; serial number of Zone Record
                         1200s         ; refresh time
                         180s          ; retry time on failure
-                        1d            ; expiration time 
+                        1d            ; expiration time
                         3600          ; cache time to live
                         )
 
 ;Name servers for this domain
-9.16.10.in-addr.arpa.         IN      NS     s09rtr.as.learn.
-
-;IP to Hostname Pointers
-126.9.16.10.in-addr.arpa.       IN      PTR      rtr.s09.as.learn. 
-1.9.16.10.in-addr.arpa.         IN      PTR      mail.s09.as.learn. 
-001.9.16.10.in-addr.arpa.       IN      PTR      w10.s09.as.learn.  
-

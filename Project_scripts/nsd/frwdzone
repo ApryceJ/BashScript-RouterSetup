@@ -4,14 +4,8 @@ s09.as.learn.   IN  SOA   s09rtr.as.learn. htp.bcit.ca. (
                         2014022501    ; serial number of Zone Record
                         1200s         ; refresh time
                         180s          ; update retry time on failure
-                        1d            ; expiration time 
+                        1d            ; expiration time
                         3600          ; cache time to live
                         )
 
 ;Name servers for this domain
-s09.as.learn.         IN      NS     s09rtr.as.learn.
-
-;addresses of hosts
-rtr.s09.as.learn.     IN      A      10.16.9.126
-mail.s09.as.learn.   IN      A      10.16.9.1
-w10.s09.as.learn.     IN      A      10.16.9.100
