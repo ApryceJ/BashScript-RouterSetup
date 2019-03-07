@@ -47,6 +47,9 @@ do
 			#increment the line number to insert after the last line.
 			let "linenum++"
 			sed -i -E "${linenum}i\$each IN  NS   ${frwzone[$each]} \n" $nsdfrwzone
+    elif [[ $each == mail.s09.as.learn.]]; then
+      let "linenum++"
+			sed -i -E "${linenum}i\$each IN  MX   ${frwzone[$each]} \n" $nsdfrwzone
 		else
 			#print all other records
       printf "$each IN  A   ${frwzone[$each]} \n" >> $nsdfrwzone
@@ -58,6 +61,7 @@ for each in ${!rvzone[@]}
 do
   #print the NS record
   if [ $each ==  9.16.10.in-addr.arpa. ]; then
+    let "linenum--" #decrements linnumber rather than reassigning variable - lazy?
 		sed -i -E "${linenum}i\$each IN  NS   ${rvzone[$each]} \n" $nsdrvzone
 	else
    #print all other records

@@ -28,18 +28,19 @@ set -o nounset                              # Treat unset variables as an erro
   source ./network/network_setup.sh
 
 # configure IPtables
-  source ./IPTables Script
+  source ./iptables_basic.sh
 
 #NSD_setup
 	#zonefiles edited with SED?
   source ./nsd/nsd_setup.sh
 	donsd
 #DHCP_setup
-		source ./dhcp/dhcp_setup.sh
+	source ./dhcp/dhcp_setup.sh
 	dodhcp
 #Unbound_setup
 	#Conf files Edited with Sed?
-	source./unbound/Unbound_setup.sh
+	source ./unbound/Unbound_setup.sh
+	dounbound
 #hostapd
 	#configuration and adapter ifcfg files edited with sed?
 #postfix

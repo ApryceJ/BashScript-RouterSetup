@@ -1,0 +1,8 @@
+#config var array
+postfxcnf=/etc/postfix/main.cf
+#or would this work better as a named so we can use the key and value
+declare -A postfixvar
+postfixvar[inet_interfaces]=all
+postfixvar[mydestination]="\$myhostname, localhost.\$mydomain, localhost, \$mydomain"
+postfixvar[home_mailbox]=Maildir/
+postfixvar[myorigin]=\$mydomain
