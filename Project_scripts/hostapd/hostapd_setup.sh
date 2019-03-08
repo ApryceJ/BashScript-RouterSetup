@@ -19,14 +19,26 @@ set -o nounset                              # Treat unset variables as an erro
 
 #source FILE
 source ./hostapdvar
-function do hostapd {
+
+function dohostapd {
 
 #set conf variables
-
+cp ./hostapd.cnf $hostcnf
 #looop to edit configuration
+for each in ${!hostap[@]}
+do
+ sed -i -E " s@my$each.+@$each=${hostap[$each]}@" $hostcnf
+done
+
+lencustwifi=${#custwifi[@]}
+for ((i=0; i<$lencustwifi; i++))
+do
+ printf "${custwifi[$i]}\n" >>  $hostcnf
+done
 
 #start services
-
 systemctl enable --now hostapd
+systemctl restart hostapd
 
 }
+dohostapd

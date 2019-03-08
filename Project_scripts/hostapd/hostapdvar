@@ -1,8 +1,23 @@
+## configuration file var
+hostcnf=/etc/hostapd/hostapd.conf
+
 #delcare array for config variables
 declare -A hostap
-hostap[]=
-hostap[]=
-hostap[]=
-hostap[]=
-hostap[]=
-hostap[]=
+hostap[wpa]=3
+hostap[wpa_key_mgmt]=WPA-PSK
+hostap[wpa_pairwise]=TKIP
+hostap[rsn_pairwise]=CCMP
+hostap[driver]=nl80211
+hostap[wpa_passphrase]=NaspBaby
+
+
+#append these
+declare -a custwifi
+custwifi[0]="interface=wlp0s6u1"
+custwifi[1]="driver=nl80211"
+custwifi[2]="ssid=NASP21_9"
+custwifi[3]="hw_mode=g"
+custwifi[4]="channel=11"
+custwifi[5]="macaddr_acl=0"
+custwifi[6]="ignore_broadcast_ssid=0"
+custwifi[7]="auth_algs=1"
