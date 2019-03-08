@@ -31,7 +31,7 @@ cp ./main.cnf $postfxcnf
 
 for each in ${!postfixvar[@]}
 do
-  linenum=$(sed -n "/my$each/=" $postfxcnf)
+  linenum=$(sed -n "/my$each.+/=" $postfxcnf)
  sed -i -E " s@my$each@$each = ${postfixvar[$each]}@" $postfxcnf
 done
 

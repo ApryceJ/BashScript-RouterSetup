@@ -21,9 +21,9 @@
 # --sysconfdir=/etc --localstatedir=/var
 
 # Protocols we want to be serving.
-protocols = imap lmtp
+myprotocols = imap lmtp
 
-# A comma separated list of IPs or hosts where to listen in for connections. 
+# A comma separated list of IPs or hosts where to listen in for connections.
 # "*" listens in all IPv4 interfaces, "::" listens in all IPv6 interfaces.
 # If you want to specify non-default ports or anything more complex,
 # edit conf.d/master.conf.
@@ -45,10 +45,10 @@ protocols = imap lmtp
 # IPs are allowed to override their IP addresses and ports (for logging and
 # for authentication checks). disable_plaintext_auth is also ignored for
 # these networks. Typically you'd specify your IMAP proxy servers here.
-#login_trusted_networks =
+mylogin_trusted_networks =
 
 # Space separated list of login access check sockets (e.g. tcpwrap)
-#login_access_sockets = 
+#login_access_sockets =
 
 # With proxy_maybe=yes if proxy destination matches any of these IPs, don't do
 # proxying. This isn't necessary normally, but may be useful if the destination
