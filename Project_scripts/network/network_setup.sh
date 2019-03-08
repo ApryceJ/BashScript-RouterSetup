@@ -19,6 +19,7 @@ set -o nounset                              # Treat unset variables as an erro
 
 #sourcing the concreate function
 source ./net_if_setup.sh
+source ./wifi_if_setup.sh
 source ./ospf_setup.sh
 #turn on packet forwarding
 echo " "
@@ -34,6 +35,8 @@ echo " "
 sleep=2
 echo "++++++++ Turning On the Network Taps ++++++++"
 concreate
+sleep=5
+wificoncreate
 echo " "
 systemctl restart network.service
 #ip a

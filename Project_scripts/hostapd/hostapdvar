@@ -1,0 +1,8 @@
+#delcare array for config variables
+declare -A hostap
+hostap[]=
+hostap[]=
+hostap[]=
+hostap[]=
+hostap[]=
+hostap[]=

@@ -56,12 +56,10 @@ done
  let "linenum++"
  sed -i -E "${linenum} i\ router-id ${INTF[$dev,0]}" $confospfd
 
-
- declare lenofospfval=${#ospfval[@]}
- for ((i=0; i<$lenofospfval; i++));
+ for each in ${!ospfval[@]};
  do
    let "linenum++"
-   sed -i -E "${linenum} i\ network ${ospfval[$i]}\/${INTF[${devcname[$i]},1]} area 0.0.0.0" $confospfd
+   sed -i -E "${linenum} i\ network $each\/${ospfval[$each]} area 0.0.0.0" $confospfd
  done
 
  #start the zebra and OSPF services

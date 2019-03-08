@@ -27,7 +27,6 @@ i=0
   do
     #delete existing connections
     nmcli con delete id $dev
-      #might need an if statement to avoid putting more than one gateway
       if [[ $i < 1 ]]; then
         #create connections gateway
        nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]} gw4 ${INTF[$dev,2]}
@@ -36,8 +35,6 @@ i=0
         nmcli con add type ethernet con-name $dev ifname $dev ip4 ${INTF[$dev,0]}/${INTF[$dev,1]}
       fi
         let "i++"
-        #to be deleted after testing
-        nmcli con delete id ${devcname[2]}
   done
 
 }
