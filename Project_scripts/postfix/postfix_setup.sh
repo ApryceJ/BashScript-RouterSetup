@@ -19,13 +19,13 @@ set -o nounset                              # Treat unset variables as an erro
 
 
 #source variables
-source ./postfixvar
+source ./postfix/postfixvar
 
 function dopostfix {
 #install postfix
 yum -y install postfix
 #copy config file
-cp ./main.cnf $postfxcnf
+cp ./postfix/main.cnf $postfxcnf
 
 #loop to edit config, one array?
 
@@ -41,4 +41,3 @@ systemctl enable --now postfix
 #killall -s SIGHUP postfix
 
 }
-dopostfix

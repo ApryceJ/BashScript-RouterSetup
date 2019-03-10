@@ -17,9 +17,11 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-echo "Disabling selinux"
-echo "#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+function turnoffselnx {
+
+echo "+++++++++ Disabling selinux ++++++++++"
 sleep 5
 	setenforce 0
 	sed -r -i 's/SELINUX+(enforcing|disabled)/SELINUX+disabled/' /etc/selinux/config
-	echo "#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+}

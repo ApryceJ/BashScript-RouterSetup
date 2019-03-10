@@ -20,12 +20,12 @@ set -o nounset                              # Treat unset variables as an erro
 
 
 # source variables
-source ./unbound.var
+source ./unbound/unbound.var
 
 function dounbound {
 
 # copy .cnf files to approperaite directories
-cp ./unbound.cnf $unbndcnf
+cp ./unbound/unbound.cnf $unbndcnf
 
 #loop for the interface
 linenum=$(sed -n '/# interface:myinterface/=' $unbndcnf)
@@ -65,4 +65,3 @@ done
 systemctl enable --now unbound
 systemctl restart unbound
 }
-dounbound

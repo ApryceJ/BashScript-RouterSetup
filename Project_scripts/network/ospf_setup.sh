@@ -17,11 +17,11 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-source ./network.conf
+source ./network/network.conf
 
 function doospf {
- cp ./ospfd.cnf $confospfd
- cp ./zebra.cnf $confzebra
+ cp ./network/ospfd.cnf $confospfd
+ cp ./network/zebra.cnf $confzebra
 
  #chown -r the quagga mkdir
   chown -R quagga:quagga /etc/quagga/
@@ -54,7 +54,7 @@ done
  let "linenum++"
  sed -i "${linenum} i\router ospf" $confospfd
  let "linenum++"
- sed -i -E "${linenum} i\ router-id ${INTF[$dev,0]}" $confospfd
+ sed -i -E "${linenum} i\ router-id ${INTF[${devcname[0]},0]}" $confospfd
 
  for each in ${!ospfval[@]};
  do

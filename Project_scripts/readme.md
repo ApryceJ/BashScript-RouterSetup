@@ -1,14 +1,12 @@
 Usage: Please run the main.sh and use the options given to deploy a Centos 7 router with wifi.
 
-Physical Setup needed:
-a VLAN adpater for particular student VLAN, this
-A VM installed with CentOS-7
-install git and clone this repo to the VM.
-sudo yum -y install git
+VM Setup:
+1 wireless USB device attached to the VM
+At least 2 wired or ethernet network adapters attached to the VM
+  Explain the vlan creatation and bridging
+Virtualbox guest additions cd attached to the CD before running this script
+an internet connection
 
-
-to start the automate configuation run sh main.sh from inside the repo directory as root.
-
-Main.sh will present you with several options for setup which you can chose to install or not
-Basic configuration: apply all updates and install needed applications
-Netdev: will configure the network adpaters based on a student number
+This script only handles 2 ehternet adpaters and 1 wireless usb adpaters for network_setup
+The script will:
+install base software packages

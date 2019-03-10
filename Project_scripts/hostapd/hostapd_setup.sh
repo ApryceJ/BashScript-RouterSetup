@@ -18,12 +18,12 @@
 set -o nounset                              # Treat unset variables as an erro
 
 #source FILE
-source ./hostapdvar
+source ./hostapd/hostapdvar
 
 function dohostapd {
 
 #set conf variables
-cp ./hostapd.cnf $hostcnf
+cp ./hostapd/hostapd.cnf $hostcnf
 #looop to edit configuration
 for each in ${!hostap[@]}
 do
@@ -38,7 +38,6 @@ done
 
 #start services
 systemctl enable --now hostapd
+sleep=10
 systemctl restart hostapd
-
 }
-dohostapd

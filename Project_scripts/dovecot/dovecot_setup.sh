@@ -19,15 +19,15 @@ set -o nounset                              # Treat unset variables as an erro
 
 
 #source variables
-source ./dovecotvar
+source ./dovecot/dovecotvar
 
 function dodovecot {
 #install postfix
 yum -y install dovecot
 #copy config file
-cp ./dovecot.cnf $dovecotcnf
-cp ./dove10mail.cnf $dove10mail
-cp ./dove10auth.cnf $dove10auth
+cp ./dovecot/dovecot.cnf $dovecotcnf
+cp ./dovecot/dove10mail.cnf $dove10mail
+cp ./dovecot/dove10auth.cnf $dove10auth
 #loop to edit config, one array?
 
 for each in ${!dovecnfvar[@]}

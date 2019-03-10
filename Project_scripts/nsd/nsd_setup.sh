@@ -18,12 +18,12 @@
 set -o nounset                              # Treat unset variables as an erro
 
 #source files
-source ./nsdvar
-source ../network/network.conf
+source ./nsd/nsdvar
+source ./network/network.conf
 #create nsd conf file
-cp ./nsd.cnf $nsdconf
-cp ./frwdzone $nsdfrwzone
-cp ./revzone $nsdrvzone
+cp ./nsd/nsd.cnf $nsdconf
+cp ./nsd/frwdzone $nsdfrwzone
+cp ./nsd/revzone $nsdrvzone
 # Edit COnfig files
 function donsd {
 # edit the ip address
@@ -43,17 +43,18 @@ for each in ${!frwzone[@]}
 do
 		#want to append again to build the zone file
 		#print the NS record
-		if [ $each == s09.as.learn. ]; then
+		if [ $each == s09.as.learn. ];then
 			#increment the line number to insert after the last line.
 			let "linenum++"
 			sed -i -E "${linenum}i\$each IN  NS   ${frwzone[$each]} \n" $nsdfrwzone
-    elif [[ $each == mail.s09.as.learn.]]; then
+    elif [ $each == mail.s09.as.learn. ];
+    then
       let "linenum++"
 			sed -i -E "${linenum}i\$each IN  MX   ${frwzone[$each]} \n" $nsdfrwzone
-		else
+		fi
 			#print all other records
       printf "$each IN  A   ${frwzone[$each]} \n" >> $nsdfrwzone
-	fi
+
 done
 
 #again for the revzone file
@@ -72,4 +73,3 @@ done
 	systemctl enable --now nsd.service
 	systemctl restart nsd.service
 }
-#donsd

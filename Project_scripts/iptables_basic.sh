@@ -16,6 +16,8 @@
 #      REVISION:  ---
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
+
+function doiptables {
 #iptables commands
 #should make sure the iptables service is running?
 systemctl enable --now iptables
@@ -49,3 +51,4 @@ iptables -P OUTPUT DROP
 iptables-save > /etc/sysconfig/iptables
 
 iptables -nvL
+}

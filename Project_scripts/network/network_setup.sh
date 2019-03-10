@@ -18,9 +18,10 @@
 set -o nounset                              # Treat unset variables as an erro
 
 #sourcing the concreate function
-source ./net_if_setup.sh
-source ./wifi_if_setup.sh
-source ./ospf_setup.sh
+source ./network/net_if_setup.sh
+source ./network/wifi_if_setup.sh
+source ./network/ospf_setup.sh
+function donetwork {
 #turn on packet forwarding
 echo " "
 echo "++++++++ Turning Packet Forwarding On ++++++++"
@@ -44,6 +45,8 @@ echo "++++++++ Turning On OSPF ++++++++"
  doospf
  sleep=5
  echo "++++++++ Done with OSPF ++++++++"
-echo " "
-echo "++++++++ Done with the Network! ++++++++"
-echo " "
+ echo " "
+ echo "++++++++ Done with the Network! ++++++++"
+ echo " "
+
+}

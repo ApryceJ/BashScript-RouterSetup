@@ -20,7 +20,7 @@ set -o nounset                              # Treat unset variables as an erro
 #https://fedoraproject.org/wiki/Networking/CLI
 #nmcli con mod $dev ipv4.dns “8.8.8.8 8.8.4.4”
 function concreate {
- source ./network.conf
+ source ./network/network.conf
 i=0
 #connection creation
   for dev in ${devcname[@]} #loops over every device in /sys/class/net
@@ -38,5 +38,3 @@ i=0
   done
 
 }
-
-#concreate()

@@ -19,36 +19,21 @@ set -o nounset                              # Treat unset variables as an erro
 
 ## sethostname to s09rtr. as a variable. this will affect /etc.resolv.conf
 # hostnameclt set-hostname $hostname
+function dobase {
 
-echo "Creating mount point, mounting, and installing VirtualBox Guest Additions"
-echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-yum -y install kernel-devel kernel-headers dkms gcc gcc-c+
-echo
-sleep 3
-yum -y install bzip2
-sleep 2
-mkdir vbox_cd
-mount /dev/cdrom ./vbox_cd
-./vbox_cd/VBoxLinuxAdditions.run
-umount ./vbox_cd
-rmdir ./vbox_cd
-echo
-
-echo "++++++++installing and updating base set of packages+++++++++++++++++++++"
 echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
 		yum -y group install base
-
-		#              install EPEL software repository
-		echo " "
-		echo "++++++++ Installing EPEL++++++++++++++"
+		#  install EPEL software repository
+		echo "++++++ Installing EPEL +++++++"
 		yum -y install epel-release
 echo " "
-		echo "++++++++ Installing DHPCD,nsd,Unbound,quagga,hostapd++++++++++++++"
+		echo "++++++ Installing DHPCD,nsd,Unbound,quagga,hostapd ++++++"
 		yum -y install nsd unbound dhcp quagga hostapd
 		sleep=2
 echo " "
-	echo "+++++++++ and Updating Entire System +++++++++++++++"
+	echo "+++++++++ Updating Entire System ++++++++++"
  	yum -y update
 	sleep=2
 echo " "
 	echo "+++++++++ Done With Base Configuration +++++++++++++++"
+}

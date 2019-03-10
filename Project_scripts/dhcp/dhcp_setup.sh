@@ -17,24 +17,25 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-source ./dhcp.conf
-#source ../network/network.conf
+source ./dhcp/dhcp.conf
 #delete config file
 function dodhcp {
 #generate new one
-  cp ./dhcp.cnf $dhcpcf
+  cp ./dhcp/dhcp.cnf $dhcpcf
+
 
 #global options
   sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+ \"[a-zA-Z].+)/option domain-name \"$dname\";/" $dhcpcf
-  sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+-[a-z].+)/option domain-name-servers 10.16.9.126;/" $dhcpcf
+  sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+-[a-z].+)/option domain-name-servers ${dhcpset[${dhcpname[0]},3]};/" $dhcpcf
 
 #get length of array and divide by 2 - this is poor
 lendhcp=$((${#dhcpset[@]} / 2))
-net=0
+netvar=0
 #eth1 or student lan subnet loop for each interface
 for dhc in ${dhcpname[@]}
 do
-	 printf "\n subnet ${netval[$net]} netmask ${dhcpset[$dhc,0]} { \n" >> $dhcpcf
+	printf "\n subnet ${netval[$netvar]} netmask ${dhcpset[$dhc,0]} { \n" >> $dhcpcf
+   let "netvar++"
     for ((i=0; i<$lendhcp; i++))
     do
        if [ "$i" -eq 1 ]; then
@@ -47,17 +48,15 @@ do
 	    printf "%s  option broadcast-address ${dhcpset[$dhc,$i]};  \n } \n " >> $dhcpcf
     fi
   done
-  let "net++"
 done
 
 #static assignmennt loop
 for each in ${!static[@]}; do
   mac=$(echo ${static[$each]} | cut -d',' -f1)
   ip=$(echo ${static[$each]} | cut -d',' -f2)
-  printf "\n host $each \n   hardware ethernet $mac; \n   fixed-address $ip; \n } \n " >> $dhcpcf
+  printf "\n host $each { \n   hardware ethernet $mac; \n   fixed-address $ip; \n } \n " >> $dhcpcf
 done
 #start services
    systemctl enable --now dhcpd
+   systemctl restart dhcpd
  }
-
-#dodhcp

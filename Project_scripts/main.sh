@@ -18,31 +18,52 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-# Configure Basic setgtings, updates and turning off other services refer to sources script
-	source ./basic_configuration.sh  #will install all packages.
 
-# Configure Turn Off SELINux
-	Source ./Selinux_Setup.sh
+#source all scripts
+source ./base/base_configuration.sh
+source ./base/selinux_setup.sh
+source ./network/network_setup.sh
+source ./unbound/unbound_setup.sh
+source ./nsd/nsd_setup.sh
+source ./dhcp/dhcp_setup.sh
+source ./hostapd/hostapd_setup.sh
+source ./postfix/postfix_setup.sh
+source ./dovecot/dovecot_setup.sh
+source ./iptables_basic.sh
 
-#Configure Newtwork
-  source ./network/network_setup.sh
+#base Config
+ dobase
 
-# configure IPtables
-  source ./iptables_basic.sh
+#network
+ donetwork
+
+#turn of selinux
+turnoffselnx
 
 #NSD_setup
-	#zonefiles edited with SED?
-  source ./nsd/nsd_setup.sh
-	donsd
-#DHCP_setup
-	source ./dhcp/dhcp_setup.sh
-	dodhcp
-#Unbound_setup
-	#Conf files Edited with Sed?
-	source ./unbound/Unbound_setup.sh
-	dounbound
-#hostapd
-	#configuration and adapter ifcfg files edited with sed?
-#postfix
+echo " +++++++++ Time for DNS ++++++++ "
+ donsd
 
+#Unbound_setup
+ dounbound
+echo " +++++++++ Done With DNS ++++++++ "
+
+#DHCP_setup
+echo " +++++++++ Time for DHCP ++++++++ "
+	dodhcp
+echo " +++++++++ Done With DHCP ++++++++ "
+
+#hostapd
+echo " +++++++++ Time for WIFI ++++++++ "
+	dohostapd
+	echo " +++++++++ Done With WIFI ++++++++ "
+#postfix
+echo " +++++++++ Time for Email ++++++++ "
+	#dopostfix
 #dovecot
+	#dodovecot
+echo " +++++++++ Done With Email ++++++++ "
+
+# configure IPtables
+echo " +++++++++ Bringing up Iptables ++++++++ "
+doiptables
