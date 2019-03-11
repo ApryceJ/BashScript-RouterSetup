@@ -20,12 +20,13 @@ set -o nounset                              # Treat unset variables as an erro
 #source files
 source ./nsd/nsdvar
 source ./network/network.conf
-#create nsd conf file
-cp ./nsd/nsd.cnf $nsdconf
-cp ./nsd/frwdzone $nsdfrwzone
-cp ./nsd/revzone $nsdrvzone
-# Edit COnfig files
+
 function donsd {
+  #create nsd conf file
+  cp ./nsd/nsd.cnf $nsdconf
+  cp ./nsd/frwdzone $nsdfrwzone
+  cp ./nsd/revzone $nsdrvzone
+
 # edit the ip address
 sed -i -E "s/ip-ad[a-z]+\: [0-9]+\.[0-9].*/ip-address: ${INTF[${devcname[0]},0]}/" $nsdconf
 #sed -i -E "s/# do-[a-z]+4\:.+/do-ip/"

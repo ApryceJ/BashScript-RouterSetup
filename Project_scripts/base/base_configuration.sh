@@ -18,8 +18,17 @@
 set -o nounset                              # Treat unset variables as an erro
 
 ## sethostname to s09rtr. as a variable. this will affect /etc.resolv.conf
-# hostnameclt set-hostname $hostname
+source ./base/basevar
+
 function dobase {
+	#sethostname
+	 hostnamectl set-hostname $hostnm
+
+	 echo "++++++++ Turning off firewalld ++++++++"
+	 systemctl disable firewalld
+	 systemctl stop firewalld
+	 echo "done"
+	 echo " "
 
 echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
 		yum -y group install base

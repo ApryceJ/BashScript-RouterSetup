@@ -23,6 +23,7 @@ set -o nounset                              # Treat unset variables as an erro
 source ./base/base_configuration.sh
 source ./base/selinux_setup.sh
 source ./network/network_setup.sh
+source ./network/ospf_setup.sh
 source ./unbound/unbound_setup.sh
 source ./nsd/nsd_setup.sh
 source ./dhcp/dhcp_setup.sh
@@ -30,40 +31,21 @@ source ./hostapd/hostapd_setup.sh
 source ./postfix/postfix_setup.sh
 source ./dovecot/dovecot_setup.sh
 source ./iptables_basic.sh
+source ./main.var
 
 #base Config
- dobase
 
+ dobase 2>$logfile
+ #turn of selinux
+ turnoffselnx 2>$logfile
 #network
- donetwork
+ donetwork 2>$logfile
 
-#turn of selinux
-turnoffselnx
-
-#NSD_setup
-echo " +++++++++ Time for DNS ++++++++ "
- donsd
-
-#Unbound_setup
- dounbound
-echo " +++++++++ Done With DNS ++++++++ "
-
-#DHCP_setup
-echo " +++++++++ Time for DHCP ++++++++ "
-	dodhcp
-echo " +++++++++ Done With DHCP ++++++++ "
-
-#hostapd
-echo " +++++++++ Time for WIFI ++++++++ "
-	dohostapd
-	echo " +++++++++ Done With WIFI ++++++++ "
-#postfix
-echo " +++++++++ Time for Email ++++++++ "
-	#dopostfix
-#dovecot
-	#dodovecot
-echo " +++++++++ Done With Email ++++++++ "
-
-# configure IPtables
-echo " +++++++++ Bringing up Iptables ++++++++ "
-doiptables
+for opt in ${!selection[@]}
+do
+if [ ${selection[$opt]} == true ]
+then
+  echo "++++++++ Turning On $opt ++++++++"
+    do$opt 2>$logfile
+fi
+done

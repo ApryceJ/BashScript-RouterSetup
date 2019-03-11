@@ -1,0 +1,27 @@
+
+#run select variables
+declare -A selection
+
+#main router config
+selection[iptables]=true
+selection[ospf]=true
+selection[nsd]=true
+selection[unbound]=true
+selection[hostap]=true
+selection[dhcp]=true
+selection[routing]=true.
+selection[postfix]=false
+selection[dovecot]=false
+
+#mail vm config
+#selection[ospf]]=false
+#selection[nsd]=false
+#selection[unbound]=false
+#selection[hostap]=false
+#selection[dhcp]=false
+#selection[routing]=false
+#selection[postfix]=true
+#selection[dovecot]=true
+
+#log FILE
+logfile=/var/log/main.log

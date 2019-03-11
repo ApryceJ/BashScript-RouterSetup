@@ -20,18 +20,12 @@ set -o nounset                              # Treat unset variables as an erro
 #sourcing the concreate function
 source ./network/net_if_setup.sh
 source ./network/wifi_if_setup.sh
-source ./network/ospf_setup.sh
+
 function donetwork {
 #turn on packet forwarding
 echo " "
-echo "++++++++ Turning Packet Forwarding On ++++++++"
+echo "++++++++ Turning on Packet Forwarding ++++++++"
 sysctl net.ipv4.ip_forward=1
-echo " "
-#turn off firewalld as iptables will be used.
-echo "++++++++ Turning off firewalld ++++++++"
-systemctl disable firewalld
-systemctl stop firewalld
-echo "done"
 echo " "
 sleep=2
 echo "++++++++ Turning On the Network Taps ++++++++"
@@ -40,13 +34,5 @@ sleep=5
 wificoncreate
 echo " "
 systemctl restart network.service
-#ip a
-echo "++++++++ Turning On OSPF ++++++++"
- doospf
- sleep=5
- echo "++++++++ Done with OSPF ++++++++"
- echo " "
- echo "++++++++ Done with the Network! ++++++++"
- echo " "
 
 }

@@ -17,7 +17,7 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
- source ./network/wifi.conf
+ source ./network/wifi.conf 2> /dev/null
 
 function wificoncreate {
 #connection creation
