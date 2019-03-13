@@ -48,8 +48,8 @@ echo "task 7"
 read -p "Pleas select a new start of DHCP Range(between 2-253): " range1
 read -p "Pleas select a new end of DHCP Range(between 2-253): " range2
 
-if [ $range1 >= $range2 ]; then
-  echo 'the end value must be bigger than the start value'
+if [ $range1 -ge $range2 ]; then
+  echo 'the end value must be bigger than the start value, and must not be the same value'
   exit 1
 elif [ $range1 -gt 253 ] || [ $range2 -gt 253 ]; then
   echo "The values supplied are greater than 253"
