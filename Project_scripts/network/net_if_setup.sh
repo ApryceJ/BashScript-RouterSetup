@@ -17,9 +17,8 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#https://fedoraproject.org/wiki/Networking/CLI
-#nmcli con mod $dev ipv4.dns “8.8.8.8 8.8.4.4”
 function concreate {
+  
  source ./network/network.conf
 i=0
 #connection creation

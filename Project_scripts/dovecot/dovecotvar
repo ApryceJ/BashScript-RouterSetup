@@ -2,6 +2,7 @@
 dovecotcnf=/etc/dovecot/dovecot.conf
 dove10mail=/etc/dovecot/conf.d/10-mail.conf
 dove10auth=/etc/dovecot/conf.d/10-auth.conf
+dove10mstr=/etc/dovecot/conf.d/10-master.conf
 
 #dovecot config array
 declare -A dovecnfvar
@@ -16,3 +17,9 @@ dovemailvar[mail_location]=maildir:~/Maildir
 declare -A doveauthvar
 doveauthvar[disable_plaintext_auth]=no
 doveauthvar[auth_mechanisms]=plain
+
+declare -A dovemstrvar
+dovemstrvar[unix_listener]="/var/spool/postfix/private/auth {"
+dovemstrvar[mode]=0660
+dovemstrvar[user]=postfix
+dovemstrvar[group]="postfix \n }"

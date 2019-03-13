@@ -17,9 +17,12 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
+function doospf {
+
 source ./network/network.conf
 
-function doospf {
+yum -y install quagga
+
  cp ./network/ospfd.cnf $confospfd
  cp ./network/zebra.cnf $confzebra
 

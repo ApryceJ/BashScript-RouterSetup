@@ -17,9 +17,11 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
- source ./network/wifi.conf 2> /dev/null
 
 function wificoncreate {
+sleep 5
+ source ./network/wifi.conf 2> /dev/null
+
 #connection creation
   for dev in ${wifidev[@]} #loops over every device in /sys/class/net
   do
@@ -27,4 +29,5 @@ function wificoncreate {
   nmcli con delete id $dev
   nmcli con add type wifi ssid ${wifi[$dev,2]} con-name $dev ifname $dev ip4 ${wifi[$dev,0]}/${wifi[$dev,1]}
   done
+
 }

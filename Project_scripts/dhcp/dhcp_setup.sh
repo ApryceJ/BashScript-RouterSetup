@@ -17,13 +17,15 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-source ./dhcp/dhcp.conf
 #delete config file
 function dodhcp {
+
+source ./dhcp/dhcp.conf
+
+yum -y install dhcp
+
 #generate new one
   cp ./dhcp/dhcp.cnf $dhcpcf
-
-
 #global options
   sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+ \"[a-zA-Z].+)/option domain-name \"$dname\";/" $dhcpcf
   sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+-[a-z].+)/option domain-name-servers ${dhcpset[${dhcpname[0]},3]};/" $dhcpcf

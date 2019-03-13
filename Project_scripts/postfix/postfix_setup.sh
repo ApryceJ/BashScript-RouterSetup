@@ -18,15 +18,17 @@
 set -o nounset                              # Treat unset variables as an erro
 
 
-#source variables
-source ./postfix/postfixvar
-
 function dopostfix {
+  source ./postfix/postfixvar
+  source ./postfix/certgen.sh
+
+#generate cert
+  docert $mailname
 #install postfix
 yum -y install postfix
 #copy config file
 cp ./postfix/main.cnf $postfxcnf
-
+cp ./postfix/master.cf $postfxmstr
 #loop to edit config, one array?
 
 for each in ${!postfixvar[@]}
@@ -38,6 +40,6 @@ done
 #enable and start the service
 
 systemctl enable --now postfix
-#killall -s SIGHUP postfix
+postfix reload
 
 }

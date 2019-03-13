@@ -18,11 +18,12 @@
 set -o nounset                              # Treat unset variables as an erro
 
 
+function dounbound {
+
+yum -y install unbound
 
 # source variables
 source ./unbound/unbound.var
-
-function dounbound {
 
 # copy .cnf files to approperaite directories
 cp ./unbound/unbound.cnf $unbndcnf
@@ -61,7 +62,14 @@ do
   	 printf  "stub-zone: \n       name: \"$each\"  \n       stub-addr: ${stubzone[$each]} \n" >> $unbndcnf
 done
 
+for each in ${!forwder[@]}
+do
+  	 printf  "forward-zone: \n       name: \"$each\"  \n       forward-addr: ${forwder[$each]} \n" >> $unbndcnf
+done
+
+
 #start/restart services
 systemctl enable --now unbound
 systemctl restart unbound
+sleep 3
 }

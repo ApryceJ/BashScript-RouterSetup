@@ -17,11 +17,15 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#source files
-source ./nsd/nsdvar
-source ./network/network.conf
+
 
 function donsd {
+
+  #source files
+  source ./nsd/nsdvar
+  source ./network/network.conf
+
+  yum -y install nsd
   #create nsd conf file
   cp ./nsd/nsd.cnf $nsdconf
   cp ./nsd/frwdzone $nsdfrwzone

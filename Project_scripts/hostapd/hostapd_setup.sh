@@ -17,10 +17,11 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#source FILE
-source ./hostapd/hostapdvar
 
 function dohostapd {
+  yum -y install hostapd
+
+source ./hostapd/hostapdvar
 
 #set conf variables
 cp ./hostapd/hostapd.cnf $hostcnf
@@ -38,6 +39,6 @@ done
 
 #start services
 systemctl enable --now hostapd
-sleep=10
-systemctl restart hostapd
+sleep 3
+#systemctl restart hostapd
 }

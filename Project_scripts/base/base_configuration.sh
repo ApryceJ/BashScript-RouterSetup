@@ -17,17 +17,16 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-## sethostname to s09rtr. as a variable. this will affect /etc.resolv.conf
-source ./base/basevar
-
 function dobase {
+
+	source ./base/basevar
+
 	#sethostname
 	 hostnamectl set-hostname $hostnm
 
-	 echo "++++++++ Turning off firewalld ++++++++"
+	 echo "++++++++ firewalld is off ++++++++"
 	 systemctl disable firewalld
 	 systemctl stop firewalld
-	 echo "done"
 	 echo " "
 
 echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
@@ -36,13 +35,8 @@ echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
 		echo "++++++ Installing EPEL +++++++"
 		yum -y install epel-release
 echo " "
-		echo "++++++ Installing DHPCD,nsd,Unbound,quagga,hostapd ++++++"
-		yum -y install nsd unbound dhcp quagga hostapd
-		sleep=2
-echo " "
-	echo "+++++++++ Updating Entire System ++++++++++"
+	echo "++++++ Updating Entire System +++++++"
  	yum -y update
 	sleep=2
-echo " "
-	echo "+++++++++ Done With Base Configuration +++++++++++++++"
+
 }

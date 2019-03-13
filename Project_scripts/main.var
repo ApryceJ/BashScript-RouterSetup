@@ -1,27 +1,22 @@
 
 #run select variables
-declare -A selection
+declare -a selection
+declare -A mailselection
 
 #main router config
-selection[iptables]=true
-selection[ospf]=true
-selection[nsd]=true
-selection[unbound]=true
-selection[hostap]=true
-selection[dhcp]=true
-selection[routing]=true.
-selection[postfix]=false
-selection[dovecot]=false
+selection[0]=dobase
+selection[1]=turnoffselnx
+selection[2]=doospf
+selection[3]=dounbound
+selection[4]=donetwork
+selection[5]=donsd
+selection[6]=dodhcp
+selection[7]=dohostapd
+#selection[8]=iptables
 
-#mail vm config
-#selection[ospf]]=false
-#selection[nsd]=false
-#selection[unbound]=false
-#selection[hostap]=false
-#selection[dhcp]=false
-#selection[routing]=false
-#selection[postfix]=true
-#selection[dovecot]=true
 
 #log FILE
 logfile=/var/log/main.log
+
+#decided to run for mailserver
+runformailsrv=0

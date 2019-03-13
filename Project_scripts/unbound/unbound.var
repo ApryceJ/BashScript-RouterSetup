@@ -27,3 +27,7 @@ stubzone[htp]=142.232.221.253
 stubzone[as.learn.]=142.232.221.253
 stubzone[s09.as.learn]=10.16.255.9
 stubzone[9.16.10.in-addr.arpa]=10.16.255.9
+
+#antoher array for a forwarder
+declare -A forwder
+forwder[.]=142.232.221.253

@@ -18,36 +18,41 @@
 set -o nounset                              # Treat unset variables as an erro
 
 
-#source variables
+function dodovecot {
+
 source ./dovecot/dovecotvar
 
-function dodovecot {
 #install postfix
 yum -y install dovecot
 #copy config file
 cp ./dovecot/dovecot.cnf $dovecotcnf
 cp ./dovecot/dove10mail.cnf $dove10mail
 cp ./dovecot/dove10auth.cnf $dove10auth
+cp ./dovecot/dove10master.cnf $dove10mstr
+
 #loop to edit config, one array?
 
 for each in ${!dovecnfvar[@]}
 do
-  linenum=$(sed -n "/my$each.+/=" $dovecotcnf)
  sed -i -E "s@my$each.+@$each = ${dovecnfvar[$each]}@" $dovecotcnf
 done
 
 #10mail config file edit
 for each in ${!dovemailvar[@]}
 do
-  linenum=$(sed -n "/my$each.+/=" $dove10mail)
  sed -i -E "s@my$each.+@$each = ${dovemailvar[$each]}@" $dove10mail
 done
 
 #10-auth conf file edit
 for each in ${!doveauthvar[@]}
 do
-  linenum=$(sed -n "/my$each.+/=" $dove10auth)
  sed -i -E "s@my$each.+@$each = ${doveauthvar[$each]}@" $dove10auth
+done
+
+#loop over master and edit for SASL/SSl/tls
+for each in ${!dovemstrvar[@]}
+do
+ sed -i -E "s@my$each.+@$each = ${dovemstrvar[$each]}@" $dove10mstr
 done
 
 #enable and start the service
