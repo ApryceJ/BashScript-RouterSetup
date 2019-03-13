@@ -1,5 +1,4 @@
-
-subnet 192.168.1.0 netmask 255.255.255.0 {
+#subnet 192.168.1.0 netmask 255.255.255.0 {
 # Do not remove this comments
 # option routers    10.10.1.16
         option  routers                  192.168.1.254;

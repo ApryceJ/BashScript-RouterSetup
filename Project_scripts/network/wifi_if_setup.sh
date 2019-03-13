@@ -20,8 +20,15 @@ set -o nounset                              # Treat unset variables as an erro
 
 function wificoncreate {
 sleep 5
- source ./network/wifi.conf 2> /dev/null
+ source ./network/wifi.conf
 
+ len=${#wifidev[@]}
+
+ if [ "$len" -eq 0 ]
+ then
+   echo "No Wifi adapter present, exiting script now"
+   exit
+ fi
 #connection creation
   for dev in ${wifidev[@]} #loops over every device in /sys/class/net
   do

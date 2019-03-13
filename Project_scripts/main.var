@@ -12,7 +12,7 @@ selection[4]=donetwork
 selection[5]=donsd
 selection[6]=dodhcp
 selection[7]=dohostapd
-#selection[8]=iptables
+selection[8]=doiptables
 
 
 #log FILE
