@@ -7,7 +7,7 @@
 
 # Function accepts a single argument, the fqdn for the cert
 function docert () {
-#DOMAIN="$1"
+DOMAIN="$1"
 if [ -z "$DOMAIN" ]; then
  echo "Usage: $(basename $0) <domain>"
  exit 11

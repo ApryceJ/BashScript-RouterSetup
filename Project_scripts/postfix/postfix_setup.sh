@@ -34,7 +34,7 @@ cp ./postfix/master.cf $postfxmstr
 for each in ${!postfixvar[@]}
 do
   linenum=$(sed -n "/my$each.+/=" $postfxcnf)
- sed -i -E " s@my$each@$each = ${postfixvar[$each]}@" $postfxcnf
+ sed -i -E " s@my$each.+@$each = ${postfixvar[$each]}@" $postfxcnf
 done
 
 #enable and start the service

@@ -48,7 +48,7 @@ elif [ $runformailsrv = 1 ]; then
   #statements
   for opt in ${!mailselection[@]} # runs for router configuration
   do
-    if [ ${mailselection[$opt]} == donetwork || ${mailselection[$opt]} == dobase ]; then
+    if [ ${mailselection[$opt]} == donetwork ] || [ ${mailselection[$opt]} == dobase ]; then
     echo " "
     echo "++++++++ ${mailselection[$opt]} ++++++++"
           ${mailselection[$opt]} $runformailsrv
