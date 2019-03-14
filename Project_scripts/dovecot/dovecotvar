@@ -3,11 +3,12 @@ dovecotcnf=/etc/dovecot/dovecot.conf
 dove10mail=/etc/dovecot/conf.d/10-mail.conf
 dove10auth=/etc/dovecot/conf.d/10-auth.conf
 dove10mstr=/etc/dovecot/conf.d/10-master.conf
+dove10ssl=/etc/dovecot/conf.d/10-ssl.conf
 
 #dovecot config array
 declare -A dovecnfvar
 dovecnfvar[protocols]="imap lmtp"
-dovecnfvar[login_trusted_networks]=10.16.9.0/24
+dovecnfvar[login_trusted_networks]=10.0.0.0/8
 
 #dovecot 10-mail.conf array
 declare -A dovemailvar
@@ -16,10 +17,16 @@ dovemailvar[mail_location]=maildir:~/Maildir
 #10-auth array
 declare -A doveauthvar
 doveauthvar[disable_plaintext_auth]=no
-doveauthvar[auth_mechanisms]=plain
+doveauthvar[auth_mechanisms]="plain login"
 
 declare -A dovemstrvar
 dovemstrvar[unix_listener]="/var/spool/postfix/private/auth {"
 dovemstrvar[mode]=0660
 dovemstrvar[user]=postfix
 dovemstrvar[group]="postfix \n }"
+
+#10-ssl.conf
+declare -A dovesslvar
+dovesslvar[ssl]=yes
+dovesslvar[ssl_key]="</etc/pki/tls/private/mail.s09.as.learn.key"
+dovesslvar[ssl_cert]="</etc/pki/tls/certs/mail.s09.as.learn.crt"

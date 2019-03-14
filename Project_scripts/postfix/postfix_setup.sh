@@ -41,5 +41,7 @@ done
 
 systemctl enable --now postfix
 postfix reload
+systemctl stop postfix
+systemctl start postfix
 
 }

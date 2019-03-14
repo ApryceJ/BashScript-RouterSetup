@@ -61,4 +61,5 @@ fail_if_error $?
 
 cp $DOMAIN.key $keypath
 cp $DOMAIN.crt $certpath
+fail_if_error $?
 }

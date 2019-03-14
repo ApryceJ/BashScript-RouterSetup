@@ -22,16 +22,25 @@
 #soft_bounce = no
 
 mysmtpd_sasl_type = dovecot
+mysmtpd_sasl_path = private/auth
+mysmtpd_sasl_auth_enable = yes
+mysmtpd_sasl_security_options = noanonymous
+mysmtpd_sasl_local_domain = $myhostname
+mysmtpd_relay_restrictions = permit_mynetworks, permit_auth_destination, permit_sasl_authenticated, reject_unauth_destination
 
+mysmtp_use_tls = yes
+mysmtp_tls_security_level = may
+mysmtp_tls_session_cache_database = btree:/var/lib/postfix/smtp_tls_cache
+mysmtpd_use_tls = yes
+mysmtpd_tls_auth_only = yes
 mysmtpd_tls_security_level = may
+mysmtpd_tls_session_cache_database = btree:/var/lib/postfix/smtpd_tls_cache
 mysmtpd_tls_key_file = /etc/pki/tls/private/mail.s09.as.learn.key
 mysmtpd_tls_cert_file = /etc/pki/tls/certs/mail.s09.as.learn.cert
 mysmtpd_tls_loglevel = 1
 mysmtpd_tls_session_cache_timeout = 3600s
-mysmtpd_tls_session_cache_database = btree:/var/lib/postfix/smtpd_tls_cache
-mytls_random_source = dev:/dev/urandom
+mytls_random_source= dev:/dev/urandom
 mytls_random_exchange_name = /var/lib/postfix/prng_exch
-mysmtpd_tls_auth_only = yes
 
 
 # LOCAL PATHNAME INFORMATION
@@ -85,7 +94,7 @@ mail_owner = postfix
 # from gethostname(). $myhostname is used as a default value for many
 # other configuration parameters.
 #
-#myhostname = host.domain.tld
+mymyhostname = myhostname
 #myhostname = virtual.domain.tld
 
 # The mydomain parameter specifies the local internet domain name.
@@ -93,7 +102,7 @@ mail_owner = postfix
 # $mydomain is used as a default value for many other configuration
 # parameters.
 #
-#mydomain = domain.tld
+mymydomain = domai
 
 # SENDING MAIL
 #
@@ -274,7 +283,7 @@ unknown_local_recipient_reject_code = 550
 # of listing the patterns here. Specify type:table for table-based lookups
 # (the value on the table right-hand side is not used).
 #
-#mynetworks = 168.100.189.0/28, 127.0.0.0/8
+mymynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/etc/postfix/network_table
 

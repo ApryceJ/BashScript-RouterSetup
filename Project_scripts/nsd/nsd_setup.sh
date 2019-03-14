@@ -51,11 +51,12 @@ do
 		if [ $each == s09.as.learn. ];then
 			#increment the line number to insert after the last line.
 			let "linenum++"
-			sed -i -E "${linenum}i\$each IN  NS   ${frwzone[$each]} \n" $nsdfrwzone
+			sed -i -E "${linenum}i\ $each IN  NS   ${frwzone[$each]} \n" $nsdfrwzone
     elif [ $each == mail.s09.as.learn. ];
     then
       let "linenum++"
-			sed -i -E "${linenum}i\$each IN  MX   ${frwzone[$each]} \n" $nsdfrwzone
+      let "linenum++"
+			sed -i -E "${linenum}i\ $each IN  MX   ${frwzone[$each]} \n" $nsdfrwzone
 		fi
 			#print all other records
       printf "$each IN  A   ${frwzone[$each]} \n" >> $nsdfrwzone

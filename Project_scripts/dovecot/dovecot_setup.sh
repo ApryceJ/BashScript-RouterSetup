@@ -29,7 +29,7 @@ cp ./dovecot/dovecot.cnf $dovecotcnf
 cp ./dovecot/dove10mail.cnf $dove10mail
 cp ./dovecot/dove10auth.cnf $dove10auth
 cp ./dovecot/dove10master.cnf $dove10mstr
-
+cp ./dovecot/dove10ssl.cnf $dove10ssl
 #loop to edit config, one array?
 
 for each in ${!dovecnfvar[@]}
@@ -53,6 +53,11 @@ done
 for each in ${!dovemstrvar[@]}
 do
  sed -i -E "s@my$each.+@$each = ${dovemstrvar[$each]}@" $dove10mstr
+done
+
+for each in ${!dovesslvar[@]}
+do
+ sed -i -E "s@my$each.+@$each = ${dovesslvar[$each]}@" $dove10ssl
 done
 
 #enable and start the service
