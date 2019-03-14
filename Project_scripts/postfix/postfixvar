@@ -19,3 +19,5 @@ postfixvar[tls_random_exchange_name]=/var/lib/postfix/prng_exch
 postfixvar[smtpd_tls_auth_only]=yes
 
 mailname=mail.s09.as.learn
+
+certpath=/etc/pki/tls/certs/

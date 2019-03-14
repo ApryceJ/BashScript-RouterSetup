@@ -17,25 +17,31 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-function donetwork {
+function donetwork () {
 
   #sourcing the concreate function
   source ./network/net_if_setup.sh
   source ./network/wifi_if_setup.sh
-  
+
 systemctl start NetworkManager
-#turn on packet forwarding
-echo " "
-echo "++++++++ Turning on Packet Forwarding ++++++++"
-sysctl net.ipv4.ip_forward=1
-echo " "
-sleep=2
+
 echo "++++++++ Turning On the Network Taps ++++++++"
 #decide if we want wifi or not - check for empty wifi var as well??
-concreate
-sleep=5
-wificoncreate
-echo " "
-systemctl stop NetworkManager
-systemctl restart network.service
+if [ $# -eq 0  ]; then
+  echo " " #turn on packet forwarding
+  echo "++++++++ Turning on Packet Forwarding ++++++++"
+  sysctl -w $pktfrwd
+  printf $pktfrwd >> $syscrl
+  #configur wired connections
+  concreate
+  sleep 5
+  #configure wireless adapter
+  wificoncreate
+  sleep 2
+  systemctl stop NetworkManager
+  systemctl restart network.service
+else
+  concreate $1
+  systemctl restart network.service
+fi
 }

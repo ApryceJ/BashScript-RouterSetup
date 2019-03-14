@@ -31,18 +31,35 @@ source ./network/network_setup.sh
 source ./nsd/nsd_setup.sh
 source ./dhcp/dhcp_setup.sh
 source ./hostapd/hostapd_setup.sh
-#source ./postfix/postfix_setup.sh
-#source ./dovecot/dovecot_setup.sh
+source ./postfix/postfix_setup.sh
+source ./dovecot/dovecot_setup.sh
 source ./network/iptables_basic.sh
 
-
+if [ $runformailsrv = 0 ]; then
  for opt in ${!selection[@]} # runs for router configuration
  do
-
    echo " "
    echo "++++++++ ${selection[$opt]} ++++++++"
          ${selection[$opt]}
         sleep 3
   echo " "
-
  done
+elif [ $runformailsrv = 1 ]; then
+  #statements
+  for opt in ${!mailselection[@]} # runs for router configuration
+  do
+    if [ ${mailselection[$opt]} == donetwork || ${mailselection[$opt]} == dobase ]; then
+    echo " "
+    echo "++++++++ ${mailselection[$opt]} ++++++++"
+          ${mailselection[$opt]} $runformailsrv
+         sleep 3
+    echo " "
+   else
+    echo " "
+    echo "++++++++ ${mailselection[$opt]} ++++++++"
+          ${mailselection[$opt]}
+      sleep 3
+    echo " "
+   fi
+ done
+fi

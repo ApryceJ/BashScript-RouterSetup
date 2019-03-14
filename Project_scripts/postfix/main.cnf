@@ -34,7 +34,6 @@ mytls_random_exchange_name = /var/lib/postfix/prng_exch
 mysmtpd_tls_auth_only = yes
 
 
-
 # LOCAL PATHNAME INFORMATION
 #
 # The queue_directory specifies the location of the Postfix queue.
@@ -691,3 +690,6 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 # readme_directory: The location of the Postfix README files.
 #
 readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
+
+smtptlsauthonly = yes
+smtptlssecuritylevel = encrypt

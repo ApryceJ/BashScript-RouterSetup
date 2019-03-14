@@ -17,9 +17,14 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-function concreate {
-  
- source ./network/network.conf
+function concreate () {
+
+  #decide which conf file to sourced
+  if [ $# -eq 0  ]; then
+    source ./network/network.conf
+  else
+    source ./network/mailnet.conf
+  fi
 i=0
 #connection creation
   for dev in ${devcname[@]} #loops over every device in /sys/class/net

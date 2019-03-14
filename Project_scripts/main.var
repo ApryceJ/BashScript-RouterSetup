@@ -1,22 +1,28 @@
 
 #run select variables
 declare -a selection
-declare -A mailselection
+declare -a mailselection
 
 #main router config
 selection[0]=dobase
 selection[1]=turnoffselnx
 selection[2]=doospf
 selection[3]=dounbound
-selection[4]=donetwork
-selection[5]=donsd
-selection[6]=dodhcp
+selection[4]=donsd
+selection[5]=dodhcp
+selection[6]=donetwork
 selection[7]=dohostapd
 selection[8]=doiptables
 
+#mail  config
+mailselection[0]=dobase
+mailselection[1]=turnoffselnx
+mailselection[2]=donetwork
+mailselection[3]=dopostfix
+mailselection[4]=dodovecot
 
 #log FILE
 logfile=/var/log/main.log
 
 #decided to run for mailserver
-runformailsrv=0
+runformailsrv=1

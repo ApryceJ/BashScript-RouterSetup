@@ -20,10 +20,10 @@ set -o nounset                              # Treat unset variables as an erro
 
 function dodovecot {
 
-source ./dovecot/dovecotvar
+   source ./dovecot/dovecotvar
 
 #install postfix
-yum -y install dovecot
+    yum -y install dovecot
 #copy config file
 cp ./dovecot/dovecot.cnf $dovecotcnf
 cp ./dovecot/dove10mail.cnf $dove10mail
