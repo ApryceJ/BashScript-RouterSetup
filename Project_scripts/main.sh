@@ -31,8 +31,7 @@ source ./network/network_setup.sh
 source ./nsd/nsd_setup.sh
 source ./dhcp/dhcp_setup.sh
 source ./hostapd/hostapd_setup.sh
-source ./postfix/postfix_setup.sh
-source ./dovecot/dovecot_setup.sh
+
 source ./network/iptables_basic.sh
 
 if [ $runformailsrv = 0 ]; then
@@ -45,6 +44,8 @@ if [ $runformailsrv = 0 ]; then
   echo " "
  done
 elif [ $runformailsrv = 1 ]; then
+  source ./postfix/postfix_setup.sh
+  source ./dovecot/dovecot_setup.sh
   #statements
   for opt in ${!mailselection[@]} # runs for router configuration
   do

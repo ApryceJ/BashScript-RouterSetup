@@ -25,4 +25,4 @@ mailselection[4]=dodovecot
 logfile=/var/log/main.log
 
 #decided to run for mailserver
-runformailsrv=1
+runformailsrv=0

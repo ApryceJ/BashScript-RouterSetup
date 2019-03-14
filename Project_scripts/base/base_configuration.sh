@@ -31,12 +31,16 @@ function dobase {
 	 systemctl stop firewalld
 	 echo " "
 
-echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
-		yum -y group install base
-		if [ $? != 0 ]; then
-			echo "could not resolve DNS or no network connectivity please confirm you have internet then rerun this script "
+
+	 ping -c 1 www.google.com > /dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			echo "!!! Could not resolve DNS !!! OR !!! No Network Connectivity !!!"
+			echo " "
+			echo "Please confirm you have internet then rerun this script."
 				exit 1
-		fi
+		else
+			echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
+			yum -y group install base
 		#install EPEL software repository
 		echo " "
 		echo "++++++ Installing EPEL +++++++"
@@ -46,5 +50,5 @@ echo " "
 	echo "++++++ Updating Entire System +++++++"
  	yum -y update
 	sleep=2
-
+fi
 }

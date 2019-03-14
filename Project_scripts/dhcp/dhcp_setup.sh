@@ -60,5 +60,6 @@ for each in ${!static[@]}; do
 done
 #start services
    systemctl enable --now dhcpd
+   sleep 2
    systemctl restart dhcpd
  }
