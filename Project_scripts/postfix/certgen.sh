@@ -47,14 +47,18 @@ openssl req \
    -out $DOMAIN.csr \
    -passin env:PASSPHRASE
 fail_if_error $?
-cp $DOMAIN.key $DOMAIN.key.org
-fail_if_error $?
+#cp $DOMAIN.key $keypath
+#cp $DOMAIN.crt $certpath
+#fail_if_error $?
 
-# Strip the password so we don't have to type it every time we restart Apache
-openssl rsa -in $DOMAIN.key.org -out $DOMAIN.key -passin env:PASSPHRASE
+# Strip the password so we don't have to type it every time we restart
+openssl rsa -in $DOMAIN.key -out $DOMAIN.key -passin env:PASSPHRASE
 fail_if_error $?
 
 # Generate the cert (good for 10 years)
 openssl x509 -req -days 365 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.crt
 fail_if_error $?
+
+cp $DOMAIN.key $keypath
+cp $DOMAIN.crt $certpath
 }

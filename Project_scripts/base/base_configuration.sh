@@ -38,6 +38,7 @@ echo "group_package_types=mandatory,default,optional" >> /etc/yum.conf
 				exit 1
 		fi
 		#install EPEL software repository
+		echo " "
 		echo "++++++ Installing EPEL +++++++"
 		yum -y install epel-release
 

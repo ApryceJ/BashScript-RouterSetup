@@ -25,7 +25,6 @@ function donetwork () {
 
 systemctl start NetworkManager
 
-echo "++++++++ Turning On the Network Taps ++++++++"
 #decide if we want wifi or not - check for empty wifi var as well??
 if [ $# -eq 0  ]; then
   echo " " #turn on packet forwarding

@@ -20,4 +20,5 @@ postfixvar[smtpd_tls_auth_only]=yes
 
 mailname=mail.s09.as.learn
 
+keypath=/etc/pki/tls/private/
 certpath=/etc/pki/tls/certs/
