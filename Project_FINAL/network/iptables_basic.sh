@@ -21,8 +21,8 @@ function doiptables {
 
   yum -y install iptables iptables-services
 #iptables commands
-  source ./network/network.conf
-  source ./network/wifi.conf
+  source ./network/networkvar
+  source ./network/wifivar
 #should make sure the iptables service is running?
   systemctl enable --now iptables
 #Clear Rules
@@ -55,5 +55,5 @@ function doiptables {
   iptables-save > /etc/sysconfig/iptables
 
   #iptables -nvL
-  systemctl restart hostapd
+  systemctl restart hostapd #restarting wifi AP again 
 }

@@ -23,7 +23,7 @@ function donsd {
 
   #source files
   source ./nsd/nsdvar
-  source ./network/network.conf
+  source ./network/networkvar
 
   yum -y install nsd
   #create nsd conf file

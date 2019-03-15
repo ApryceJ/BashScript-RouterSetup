@@ -33,7 +33,7 @@ if [ $# -eq 0  ]; then
   sed -i -E "s/ipsettings/$pktfrwd/" $syscrl
   #configur wired connections
   concreate
-  sleep 5
+  sleep 2
   #configure wireless adapter
   wificoncreate
   sleep 2
