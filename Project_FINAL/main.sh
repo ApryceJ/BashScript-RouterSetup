@@ -30,6 +30,14 @@ source ./dhcp/dhcp_setup.sh
 source ./hostapd/hostapd_setup.sh
 source ./network/iptables_basic.sh
 
+ping -c 1 www.google.com > /dev/null 2>&1
+ if [ $? -ne 0 ]; then
+   echo "!!! Could not resolve DNS !!! OR !!! No Network Connectivity !!!"
+   echo " "
+   echo "Please confirm you have internet then rerun this script."
+   exit 1
+ fi
+
 if [ $runformailsrv = 0 ]; then
  for opt in ${!selection[@]} # runs for router configuration
  do
