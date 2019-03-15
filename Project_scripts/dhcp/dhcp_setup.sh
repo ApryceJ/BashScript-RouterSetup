@@ -17,14 +17,15 @@
 #===============================================================================
 set -o nounset                              # Treat unset variables as an erro
 
-#delete config file
+
 function dodhcp {
 
 source ./dhcp/dhcpvar
 
+#installing dhcp service
 yum -y install dhcp
 
-#generate new one
+#generate new config file
   cp ./dhcp/dhcp.cnf $dhcpcf
 #global options
   sed -i -E "s/(opt[a-z]+ dom[a-z]+-[a-z]+ \"[a-zA-Z].+)/option domain-name \"$dname\";/" $dhcpcf
@@ -40,15 +41,15 @@ do
    let "netvar++"
     for ((i=0; i<$lendhcp; i++))
     do
-       if [ "$i" -eq 1 ]; then
+      if [ "$i" -eq 1 ]; then
          rangestart=$i
       elif [ "$i" -eq 2 ]; then
       printf "%s  range ${dhcpset[$dhc,$rangestart]} ${dhcpset[$dhc,$i]}; \n" >> $dhcpcf
-    elif [ "$i" -eq 3 ]; then
+      elif [ "$i" -eq 3 ]; then
 	    printf "%s  option routers ${dhcpset[$dhc,$i]}; \n" >> $dhcpcf
-    elif [ "$i" -eq 4 ]; then
+      elif [ "$i" -eq 4 ]; then
 	    printf "%s  option broadcast-address ${dhcpset[$dhc,$i]};  \n } \n " >> $dhcpcf
-    fi
+      fi
   done
 done
 
