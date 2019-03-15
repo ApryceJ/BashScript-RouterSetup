@@ -20,7 +20,7 @@ set -o nounset                              # Treat unset variables as an erro
 
 function wificoncreate {
 sleep 5
-source ./network/wifi.conf
+source ./network/wifivar
 
 #connection creation
   for dev in ${wifidev[@]} #loops over every device in /sys/class/net

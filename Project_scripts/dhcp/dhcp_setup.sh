@@ -20,7 +20,7 @@ set -o nounset                              # Treat unset variables as an erro
 #delete config file
 function dodhcp {
 
-source ./dhcp/dhcp.conf
+source ./dhcp/dhcpvar
 
 yum -y install dhcp
 

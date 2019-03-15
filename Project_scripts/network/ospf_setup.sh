@@ -19,7 +19,7 @@ set -o nounset                              # Treat unset variables as an erro
 
 function doospf {
 
-source ./network/network.conf
+source ./network/networkvar
 
 yum -y install quagga
 

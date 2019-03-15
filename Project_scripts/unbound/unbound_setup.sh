@@ -23,7 +23,7 @@ function dounbound {
 yum -y install unbound
 
 # source variables
-source ./unbound/unbound.var
+source ./unbound/unboundvar
 
 # copy .cnf files to approperaite directories
 cp ./unbound/unbound.cnf $unbndcnf

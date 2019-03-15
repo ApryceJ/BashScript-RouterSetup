@@ -29,8 +29,8 @@ systemctl start NetworkManager
 if [ $# -eq 0  ]; then
   echo " " #turn on packet forwarding
   echo "++++++++ Turning on Packet Forwarding ++++++++"
-  sysctl -w $pktfrwd
-  printf $pktfrwd >> $syscrl
+  cp ./network/sysctl.cnf $syscrl
+  sed -i -E "s/ipsettings/$pktfrwd/" $syscrl
   #configur wired connections
   concreate
   sleep 5

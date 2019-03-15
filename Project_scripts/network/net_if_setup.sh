@@ -21,9 +21,9 @@ function concreate () {
 
   #decide which conf file to sourced
   if [ $# -eq 0  ]; then
-    source ./network/network.conf
+    source ./network/networkvar
   else
-    source ./network/mailnet.conf
+    source ./network/mailnetvar
   fi
 i=0
 #connection creation
