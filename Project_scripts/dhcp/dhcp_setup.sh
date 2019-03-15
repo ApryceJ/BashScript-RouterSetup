@@ -59,7 +59,7 @@ for each in ${!static[@]}; do
   printf "\n host $each { \n   hardware ethernet $mac; \n   fixed-address $ip; \n } \n " >> $dhcpcf
 done
 #start services
-   systemctl enable --now dhcpd
-   sleep 2
-   systemctl restart dhcpd
+   systemctl enable --now dhcpd 2> /dev/null
+   sleep 5
+   systemctl restart dhcpd 2> /dev/null
  }

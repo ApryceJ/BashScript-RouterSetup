@@ -40,5 +40,5 @@ done
 #start services
 systemctl enable --now hostapd
 sleep 3
-#systemctl restart hostapd
+systemctl restart dhcpd #restarting dhcpd again for a 3 time
 }

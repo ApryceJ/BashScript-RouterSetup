@@ -2,7 +2,7 @@ Usage: Please run the main.sh and use the options given to deploy a Centos 7 rou
 All service dependent values are stored in service folders in the .conf or .var files respective to the service.
 .cnf files are service config files that will be copied to the target VM directories to run the service.
 
-This SCRIPT WILL NOT RUN with OUT INTERNET
+!!THIS SCRIPT WILL NOT RUN WITHOUT INTERNET!!
 
 Router VM Setup:
 centos 7
@@ -20,7 +20,9 @@ Turn off selinux and firewalld
 changes the hostname respective to the runformailsrv switch stored in main.var file
 updates entire system
 
-Depending on the runformailsrv varaiable in the main.conf file it will use different variables
-for:
+Depending on the runformailsrv variable in the main.var file it will use different variables
+for the following:
+base install hostname
+network
 postfix
 dovecot setup

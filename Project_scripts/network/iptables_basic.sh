@@ -55,4 +55,5 @@ function doiptables {
   iptables-save > /etc/sysconfig/iptables
 
   #iptables -nvL
+  systemctl restart hostapd
 }
