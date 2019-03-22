@@ -1,0 +1,12 @@
+[Unit]
+Description=ngnxproxy Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/local/bin/startngnxcntr.sh
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
